@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFilteringForRadGridView", "CustomFilteringForRadGridView\CustomFilteringForRadGridView.csproj", "{0A725FC9-639D-46D0-B0C0-CC9A9DEEFF18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFilteringForRadGridView.Web", "CustomFilteringForRadGridView.Web\CustomFilteringForRadGridView.Web.csproj", "{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A725FC9-639D-46D0-B0C0-CC9A9DEEFF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A725FC9-639D-46D0-B0C0-CC9A9DEEFF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A725FC9-639D-46D0-B0C0-CC9A9DEEFF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A725FC9-639D-46D0-B0C0-CC9A9DEEFF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
