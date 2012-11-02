@@ -8,21 +8,14 @@
 	d:DesignWidth="234.5" d:DesignHeight="95.5" Background="White" BorderBrush="#FFD6D0D0" BorderThickness="1">
 	<Border x:Name="LayoutRoot" Background="#E4FFFFFF" BorderBrush="#FF818181" BorderThickness="2" CornerRadius="1">
 		<Grid Background="Transparent">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="0.317*"/>
-				<ColumnDefinition Width="0.683*"/>
-			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<Button x:Name="_clearFilter" Content="Clear Filter" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,3,8,0" Click="OnClear"/>
-			<Button x:Name="_applyFilter" Content="Apply Filter" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,3,0,0" TabIndex="2147483624" Grid.Column="1"/>
-			<TextBox TextWrapping="Wrap" Margin="8,3" Text="{Binding DivisionFilterValue, Mode=TwoWay, TargetNullValue=''}" Grid.Column="1" d:LayoutOverrides="GridBox" Grid.Row="1"/>
-			<TextBlock HorizontalAlignment="Left" Margin="6,3,0,3" TextWrapping="Wrap" Text="Division Id:" VerticalAlignment="Center" Grid.Row="1"/>
-			<TextBox TextWrapping="Wrap" Margin="8,3" Text="{Binding RegionFilterValue, Mode=TwoWay, TargetNullValue=''}" Grid.Column="1" d:LayoutOverrides="GridBox"/>
-			<TextBlock HorizontalAlignment="Left" Margin="6,3,0,3" TextWrapping="Wrap" Text="Region Id:" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+			<RadioButton Content="Division" d:LayoutOverrides="Width, Height" Grid.Row="2" GroupName="Hierarchy" IsChecked="{Binding IsDivisionFilterActive, Mode=TwoWay}"/>
+			<RadioButton Content="Region" d:LayoutOverrides="Width, Height" Grid.Row="1" GroupName="Hierarchy" IsChecked="{Binding IsRegionFilterActive, Mode=TwoWay}"/>
+			<RadioButton Content="National" d:LayoutOverrides="Width, Height" GroupName="Hierarchy"/>
 		</Grid>
 	</Border>
 </UserControl>

@@ -13,16 +13,27 @@
 		<local:MainPageViewModel x:Key="MainPageViewModelDataSource" d:IsDataSource="True"/>
 	</UserControl.Resources>
     <Grid x:Name="LayoutRoot" Background="White" DataContext="{Binding Source={StaticResource MainPageViewModelDataSource}}">
-    	<telerik:RadGridView Margin="8,8,8,3.333" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding Data}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="0.502*"/>
+    		<ColumnDefinition Width="0.498*"/>
+    	</Grid.ColumnDefinitions>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="0.15*"/>
+    		<RowDefinition Height="0.85*"/>
+    	</Grid.RowDefinitions>
+    	<telerik:RadGridView Margin="8,2,8,3" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding StoreData}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False" Grid.Row="1" Grid.ColumnSpan="2">
     		<telerik:RadGridView.Columns>
     			<telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding StoreName}" Header="Store Name">
     				<telerik:GridViewDataColumn.FilteringControl>
-    					<filter:HierarchyFilter />		
+                        <filter:HierarchyFilter RegionId="{Binding SelectedRegionId, Source={StaticResource MainPageViewModelDataSource}}" DivisionId="2" />		
 					</telerik:GridViewDataColumn.FilteringControl>			
 				</telerik:GridViewDataColumn>
     			<telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
 				<telerik:GridViewDataColumn UniqueName="DivisionId" DataMemberBinding="{Binding DivisionId}" Header="Division"/>
     		</telerik:RadGridView.Columns>
     	</telerik:RadGridView>
+    	<ComboBox Margin="8,8,62,8" Visibility="Collapsed"/>
+        <TextBox x:Name="_regionId" Margin="8,8,62,13" TextWrapping="Wrap" Text="{Binding SelectedRegionId, Mode=TwoWay}" d:LayoutOverrides="Height"/>
+    	<TextBox x:Name="_divisionId" Margin="8,8,62,13" TextWrapping="Wrap" d:LayoutOverrides="Height" Grid.Column="1"/>
     </Grid>
 </UserControl>

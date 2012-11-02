@@ -22,10 +22,56 @@ namespace CustomFilteringForRadGridView.CustomFilter
 
         private FilterDescriptor _regionFilter;
         private FilterDescriptor _divisionFilter;
+        private bool _isDivisionFilterActive;
+        private int _divisionId;
+        private bool _isRegionFilterActive;
+        private int _regionId;
 
-        /// <summary>
-        /// RegionFilter textbox value which is binded on the UI
-        /// </summary>
+        #region Binding Properties
+
+        public int DivisionId
+        {
+            get { return _divisionId; }
+            set
+            {
+                _divisionId = value;
+                OnPropertyChanged("DivisionId");
+            }
+        }
+
+        public int RegionId
+        {
+            get { return _regionId; }
+            set
+            {
+                _regionId = value;
+                OnPropertyChanged("RegionId");
+            }
+        }
+
+        #endregion
+
+
+        #region Filter Properties
+
+        public bool IsRegionFilterActive
+        {
+            get { return _isRegionFilterActive; }
+            set
+            {
+                if (value)
+                {
+                    RegionFilterValue = _regionId;
+                }
+                else
+                {
+                    RegionFilterValue = null;
+                }
+                _isRegionFilterActive = value;
+                OnPropertyChanged("IsRegionFilterActive");
+            }
+        }
+
         public object RegionFilterValue
         {
             get { return _regionFilter.Value; }
@@ -34,11 +80,11 @@ namespace CustomFilteringForRadGridView.CustomFilter
                 // If the value is same as the current value, return
                 if (_regionFilter.Value == value) return;
 
-                if(value != null)
+                if (value != null)
                 {
                     _regionFilter.Value = value;
                     // Only add the filter if target filter does not already contain the filter
-                    if(!_targetFilters.Contains(_regionFilter))
+                    if (!_targetFilters.Contains(_regionFilter))
                     {
                         _targetFilters.Add(_regionFilter);
                     }
@@ -51,6 +97,24 @@ namespace CustomFilteringForRadGridView.CustomFilter
                     _targetFilters.Remove(_regionFilter);
                 }
                 OnPropertyChanged("RegionFilterValue");
+            }
+        }
+
+        public bool IsDivisionFilterActive
+        {
+            get { return _isDivisionFilterActive; }
+            set
+            {
+                if (value)
+                {
+                    DivisionFilterValue = _divisionId;
+                }
+                else
+                {
+                    DivisionFilterValue = null;
+                }
+                _isDivisionFilterActive = value;
+                OnPropertyChanged("IsDivisionFilterActive");
             }
         }
 
@@ -84,13 +148,15 @@ namespace CustomFilteringForRadGridView.CustomFilter
             }
         }
 
+        #endregion
+
         /// <summary>
         /// Returns whether the current filter is active
         /// </summary>
         public bool IsActive
         {
             // The control is active if the FilterDescriptorCollection contains the regionFilter
-            get { return _targetFilters.Contains(_regionFilter); }
+            get { return _targetFilters.Count > 0; }
         }
 
         /// <summary>
@@ -103,12 +169,19 @@ namespace CustomFilteringForRadGridView.CustomFilter
 
         public HierarchyFilterViewModel(
             GridViewColumn fieldDescriptor,
-            FilterDescriptorCollection targetFilters)
+            FilterDescriptorCollection targetFilters, int divisionId, int regionId)
         {
             _fieldDescriptor = fieldDescriptor as GridViewBoundColumnBase;
             _targetFilters = targetFilters;
             _dataMemberName = fieldDescriptor.UniqueName;
+
+            _divisionId = divisionId;
+            _regionId = regionId;
+
             CreateFilterDescriptor();
+
+            // If FilterCollection is changed, notify the UI to show filter is active.
+            _targetFilters.CollectionChanged += (sender, args) => OnPropertyChanged("IsActive");
         }
 
         private void CreateFilterDescriptor()
@@ -128,9 +201,11 @@ namespace CustomFilteringForRadGridView.CustomFilter
                                   };
         }
 
-        public void Prepare()
+        public void Prepare(int regionId, int divisionId)
         {
-            // No code for now!
+            // This method is called each time the filter is opened.
+            RegionFilterValue = regionId;
+            DivisionFilterValue = divisionId;
         }
 
 

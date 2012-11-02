@@ -15,40 +15,96 @@ namespace CustomFilteringForRadGridView
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        private List<SampleData> _data;
-        public List<SampleData> Data
+        private List<StoreData> _storeData;
+        private List<DivisionData> _divisionData;
+        private List<RegionData> _regionData;
+        private int _selectedRegionId;
+
+        public int SelectedRegionId
         {
-            get { return _data; }
+            get { return _selectedRegionId; }
             set
             {
-                _data = value;
+                _selectedRegionId = value;
+                OnPropertyChanged("SelectedRegionId");
+            }
+        }
+
+        public List<StoreData> StoreData
+        {
+            get { return _storeData; }
+            set
+            {
+                _storeData = value;
                 OnPropertyChanged("Data");
             }
         }
-        
+
+        public List<DivisionData> DivisionData
+        {
+            get { return _divisionData; }
+            set
+            {
+                _divisionData = value;
+                OnPropertyChanged("DivisionData");
+            }
+        }
+
+        public List<RegionData> RegionData
+        {
+            get { return _regionData; }
+            set
+            {
+                _regionData = value;
+                OnPropertyChanged("RegionData");
+            }
+        }
 
         public MainPageViewModel()
         {
-            Data = GenerateData();
+            GenerateData();
         }
 
-        private static List<SampleData> GenerateData()
+        private void GenerateData()
         {
             var random = new Random();
-            var sampleData = new List<SampleData>();
+            var storeData = new List<StoreData>();
+            var regionData = new List<RegionData>();
+            var divisionData = new List<DivisionData>();
 
             for (int i = 0; i < 100; i++)
             {
-                sampleData.Add(new SampleData
+                storeData.Add(new StoreData
                                    {
                                        StoreName = "Store " + i,
                                        RegionId = (i/10) + 1,
                                        DivisionId = (i/5) + 1,
                                        Value = random.Next(0, 99999999)
                                    });
+
+                if(i % 5 == 0)
+                {
+                    divisionData.Add(new DivisionData
+                                         {
+                                             DivisionName = "Division " + (i + 1),
+                                             DivisionId = i + 1,
+                                             RegionId = (i / 10) + 1
+                                         });
+                }
+
+                if (i % 10 == 0)
+                {
+                    regionData.Add(new RegionData
+                                       {
+                                           RegionName = "Region " + (i + 1),
+                                           RegionId = i + 1
+                                       });
+                }
             }
 
-            return sampleData;
+            StoreData = storeData;
+            DivisionData = divisionData;
+            RegionData = regionData;
         }
 
         #region INotifyPropertyChanged

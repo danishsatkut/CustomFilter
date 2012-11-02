@@ -19,7 +19,41 @@ namespace CustomFilteringForRadGridView.CustomFilter
 	    public static readonly DependencyProperty IsActiveProperty =
 	        DependencyProperty.Register("IsActive", typeof (bool), typeof (HierarchyFilter), new PropertyMetadata(false));
 
-		public HierarchyFilter()
+        #region Custom Control Properties
+
+	    public static readonly DependencyProperty DivisionIdProperty =
+	        DependencyProperty.Register("DivisionId", typeof (int), typeof (HierarchyFilter), new PropertyMetadata(default(int)));
+
+	    public int DivisionId
+	    {
+	        get { return (int) GetValue(DivisionIdProperty); }
+	        set { SetValue(DivisionIdProperty, value); }
+	    }
+
+	    public static readonly DependencyProperty RegionIdProperty =
+	        DependencyProperty.Register("RegionId", typeof (int), typeof (HierarchyFilter), new PropertyMetadata(default(int)));
+
+	    public int RegionId
+	    {
+	        get { return (int) GetValue(RegionIdProperty); }
+	        set
+	        {
+	            SetValue(RegionIdProperty, value);
+                //OnRegionIdChanged(value);
+	        }
+	    }
+
+        #endregion
+
+        private void OnRegionIdChanged(int value)
+        {
+            if (!(DataContext is HierarchyFilterViewModel)) return;
+
+            var viewmodel = DataContext as HierarchyFilterViewModel;
+            viewmodel.Prepare(value, DivisionId);
+        }   
+
+        public HierarchyFilter()
 		{
 			// Required to initialize variables
 			InitializeComponent();
@@ -33,15 +67,21 @@ namespace CustomFilteringForRadGridView.CustomFilter
 	        if(DataContext == null)
 	        {
                 // Create the view model the very first time prepare is called.
-	            var viewmodel = new HierarchyFilterViewModel(column, column.DataControl.FilterDescriptors);
+	            var viewmodel = new HierarchyFilterViewModel(column, column.DataControl.FilterDescriptors, DivisionId, RegionId);
                 // Let the ViewModel decide about the IsActive property value
-	            SetBinding(IsActiveProperty, new Binding {Source = viewmodel, Mode = BindingMode.OneWay});
+	            SetBinding(IsActiveProperty, new Binding("IsActive")
+	                                             {
+	                                                 Source = viewmodel, 
+                                                     Mode = BindingMode.OneWay
+	                                             });
+                
+                
 
 	            DataContext = viewmodel;
 	        }
             else
 	        {
-	            ((HierarchyFilterViewModel)DataContext).Prepare();
+	            ((HierarchyFilterViewModel)DataContext).Prepare(regionId:RegionId, divisionId:DivisionId);
 	        }
 	    }
 
@@ -63,4 +103,14 @@ namespace CustomFilteringForRadGridView.CustomFilter
 
         }
 	}
+
+    public class RegionIdEventArgs : EventArgs
+    {
+        public RegionIdEventArgs(int regionId)
+        {
+            RegionId = regionId;
+        }
+
+        public int RegionId { get; set; }
+    }
 }
