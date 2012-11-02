@@ -21,6 +21,7 @@
 					</telerik:GridViewDataColumn.FilteringControl>			
 				</telerik:GridViewDataColumn>
     			<telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
+				<telerik:GridViewDataColumn UniqueName="DivisionId" DataMemberBinding="{Binding DivisionId}" Header="Division"/>
     		</telerik:RadGridView.Columns>
     	</telerik:RadGridView>
     </Grid>

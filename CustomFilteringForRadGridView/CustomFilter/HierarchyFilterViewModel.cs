@@ -21,6 +21,7 @@ namespace CustomFilteringForRadGridView.CustomFilter
         private readonly FilterDescriptorCollection _targetFilters;
 
         private FilterDescriptor _regionFilter;
+        private FilterDescriptor _divisionFilter;
 
         /// <summary>
         /// RegionFilter textbox value which is binded on the UI
@@ -50,6 +51,36 @@ namespace CustomFilteringForRadGridView.CustomFilter
                     _targetFilters.Remove(_regionFilter);
                 }
                 OnPropertyChanged("RegionFilterValue");
+            }
+        }
+
+        public object DivisionFilterValue
+        {
+            get { return _divisionFilter.Value; }
+            set
+            {
+                // 1. If values are same, return
+                if (_divisionFilter.Value == value) return;
+
+                // 2. If values are different, the filter can be set or unset    
+                if (value != null)
+                {
+                    // 2.a. If value is not null, set the value to the filter.Value
+                    _divisionFilter.Value = value;
+
+                    if (!_targetFilters.Contains(_divisionFilter))
+                    {
+                        // 2.a.i. If filterCollection does not already Contains filter, add the filter
+                        _targetFilters.Add(_divisionFilter);
+                    }
+                }
+                else
+                {
+                    // 2.b. If value is null, unset the filter.Value and remove the filter from filterCollection
+                    _divisionFilter.Value = OperatorValueFilterDescriptorBase.UnsetValue;
+                    _targetFilters.Remove(_divisionFilter);
+                }
+                OnPropertyChanged("DivisionFilterValue");
             }
         }
 
@@ -83,11 +114,18 @@ namespace CustomFilteringForRadGridView.CustomFilter
         private void CreateFilterDescriptor()
         {
             _regionFilter = new FilterDescriptor
-                                       {
-                                           Member = _dataMemberName,
-                                           MemberType = _fieldDescriptor.DataType,
-                                           Operator = FilterOperator.IsEqualTo
-                                       };
+                                {
+                                    Member = "RegionId",
+                                    MemberType = typeof(int),
+                                    Operator = FilterOperator.IsEqualTo
+                                };
+
+            _divisionFilter = new FilterDescriptor
+                                  {
+                                      Member = "DivisionId",
+                                      MemberType = typeof(int),
+                                      Operator = FilterOperator.IsEqualTo
+                                  };
         }
 
         public void Prepare()

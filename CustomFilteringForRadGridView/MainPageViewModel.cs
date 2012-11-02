@@ -43,6 +43,7 @@ namespace CustomFilteringForRadGridView
                                    {
                                        StoreName = "Store " + i,
                                        RegionId = (i/10) + 1,
+                                       DivisionId = (i/5) + 1,
                                        Value = random.Next(0, 99999999)
                                    });
             }
