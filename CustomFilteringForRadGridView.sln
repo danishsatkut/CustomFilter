@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFilteringForRadGridVi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFilteringForRadGridView.Web", "CustomFilteringForRadGridView.Web\CustomFilteringForRadGridView.Web.csproj", "{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchyModel", "HierarchyModel\HierarchyModel.csproj", "{ADF80EB5-5390-401B-BEBA-3FF71E31C2B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CBF0D3A-D779-4FEB-B6C6-490C6FD3576E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF80EB5-5390-401B-BEBA-3FF71E31C2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF80EB5-5390-401B-BEBA-3FF71E31C2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF80EB5-5390-401B-BEBA-3FF71E31C2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF80EB5-5390-401B-BEBA-3FF71E31C2B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
