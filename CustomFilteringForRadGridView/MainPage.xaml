@@ -5,34 +5,35 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:CustomFilteringForRadGridView"
 	xmlns:filter="clr-namespace:CustomFilteringForRadGridView.CustomFilter"
-	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
-	x:Class="CustomFilteringForRadGridView.MainPage"
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:ViewModel="clr-namespace:CustomFilteringForRadGridView.ViewModel"
+    x:Class="CustomFilteringForRadGridView.MainPage"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
-	<UserControl.Resources>
-		<local:MainPageViewModel x:Key="MainPageViewModelDataSource" d:IsDataSource="True"/>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <ViewModel:MainPageViewModel x:Key="MainPageViewModelDataSource" d:IsDataSource="True"/>
+    </UserControl.Resources>
     <Grid x:Name="LayoutRoot" Background="White" DataContext="{Binding Source={StaticResource MainPageViewModelDataSource}}">
-    	<Grid.ColumnDefinitions>
-    		<ColumnDefinition Width="0.502*"/>
-    		<ColumnDefinition Width="0.498*"/>
-    	</Grid.ColumnDefinitions>
-    	<Grid.RowDefinitions>
-    		<RowDefinition Height="0.15*"/>
-    		<RowDefinition Height="0.85*"/>
-    	</Grid.RowDefinitions>
-    	<telerik:RadGridView Margin="8,2,8,3" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding Stores}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False" Grid.Row="1" Grid.ColumnSpan="2">
-    		<telerik:RadGridView.Columns>
-    			<telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding StoreName}" Header="Store Name">		
-				</telerik:GridViewDataColumn>
-    			<telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
-				<telerik:GridViewDataColumn UniqueName="DistrictId" DataMemberBinding="{Binding DistrictId}" Header="District"/>
-				<telerik:GridViewDataColumn UniqueName="DivisionId" DataMemberBinding="{Binding DivisionId}" Header="Division"/>
-				<telerik:GridViewDataColumn UniqueName="RegionId" DataMemberBinding="{Binding RegionId}" Header="Region"/>
-    		</telerik:RadGridView.Columns>
-    	</telerik:RadGridView>
-    	<ComboBox Margin="8,8,62,8" Visibility="Collapsed"/>
-		<!--
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.502*"/>
+            <ColumnDefinition Width="0.498*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="0.85*"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView Margin="8,2,8,3" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding Stores}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False" Grid.Row="1" Grid.ColumnSpan="2">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding StoreName}" Header="Store Name">
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
+                <telerik:GridViewDataColumn UniqueName="DistrictId" DataMemberBinding="{Binding DistrictId}" Header="District"/>
+                <telerik:GridViewDataColumn UniqueName="DivisionId" DataMemberBinding="{Binding DivisionId}" Header="Division"/>
+                <telerik:GridViewDataColumn UniqueName="RegionId" DataMemberBinding="{Binding RegionId}" Header="Region"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <ComboBox Margin="8,8,62,8" Visibility="Collapsed"/>
+        <!--
         <TextBox x:Name="_regionId" Margin="8,8,62,13" TextWrapping="Wrap" Text="{Binding SelectedRegionId, Mode=TwoWay}" d:LayoutOverrides="Height"/>
     	<TextBox x:Name="_divisionId" Margin="8,8,62,13" TextWrapping="Wrap" d:LayoutOverrides="Height" Grid.Column="1"/>
 		-->

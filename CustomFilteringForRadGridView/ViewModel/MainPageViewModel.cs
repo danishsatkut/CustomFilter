@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿using System.Collections.Generic;
 using HierarchyModel;
 using HierarchyModel.Hierarchy;
 using HierarchyModel.Model;
 using Telerik.Windows.Controls;
 
-namespace CustomFilteringForRadGridView
+namespace CustomFilteringForRadGridView.ViewModel
 {
     public class MainPageViewModel : ViewModelBase
     {
@@ -58,15 +47,5 @@ namespace CustomFilteringForRadGridView
             NationalHierarchy = SampleDataGenerator.GenerateDataWithHierarchy();
             Stores = SampleDataGenerator.Stores;
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }
