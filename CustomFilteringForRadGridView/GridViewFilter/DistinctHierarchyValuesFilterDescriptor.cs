@@ -8,8 +8,6 @@ using Telerik.Windows.Data;
 
 namespace CustomFilteringForRadGridView.GridViewFilter
 {
-    // TODO: Create an event for DistinctValuesHierarchies's activated event.
-
     /// <summary>
     /// This class represents the Filter of Distinct Values for each Hierarchy.
     /// </summary>
@@ -26,28 +24,17 @@ namespace CustomFilteringForRadGridView.GridViewFilter
         /// </summary>
         private readonly CompositeFilterDescriptor _compositeFilter;
 
-        // TODO: The following constructor takes GridViewColumn as parameter
-        // TODO: If this does not work, we will gi with simple string name
         public DistinctHierarchyValuesFilterDescriptor(string columnName)
         {
             _columnName = columnName;
             _compositeFilter = new CompositeFilterDescriptor { LogicalOperator = FilterCompositionLogicalOperator.Or };
             _compositeFilter.PropertyChanged += (sender, args) => OnPropertyChanged(string.Empty);
-            _compositeFilter.FilterDescriptors.CollectionChanged += (sender, args) =>
-                                                                        {
-                                                                            if (Activated != null)
-                                                                            {
-                                                                                Activated(this, null);
-                                                                            }
-                                                                        };
         }
 
         public DistinctHierarchyValuesFilterDescriptor(GridViewColumn column)
             : this(column.FilterMemberPath)
         {
         }
-
-        public event EventHandler Activated;
 
         #region Implementation of IDistinctValuesFilterDescriptor
 
@@ -109,7 +96,6 @@ namespace CustomFilteringForRadGridView.GridViewFilter
         {
             get
             {
-                // TODO: This Linq expression should work, but just a heads-up
                 return (from fd in FilterDescriptors
                         select fd.Value);
             }

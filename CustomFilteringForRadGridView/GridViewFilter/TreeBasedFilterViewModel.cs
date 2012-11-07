@@ -10,9 +10,7 @@ using Telerik.Windows.Data;
 
 namespace CustomFilteringForRadGridView.GridViewFilter
 {
-    // TODO: Use the PercentageFilteringViewModel as sample to create further code
-    // TODO: Change isActive => _filters.IsActive
-    // TODO: Attach handler to the _filters changed event
+    // TODO: Remove the clear filter functionality and implement NationalHierarchy
 
     public class TreeBasedFilterViewModel : ViewModelBase
     {
