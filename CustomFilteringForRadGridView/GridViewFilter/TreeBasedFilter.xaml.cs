@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using HierarchyModel.Hierarchy;
@@ -22,8 +23,8 @@ namespace CustomFilteringForRadGridView.GridViewFilter
 
         public void Prepare(GridViewColumn column)
         {
-            if(DataContext == null)
-	        {
+            if (DataContext == null)
+            {
                 // Create the view model the very first time prepare is called.
                 var viewmodel = new TreeBasedFilterViewModel(column.DataControl.FilterDescriptors);
                 // Let the ViewModel decide about the IsActive property value
@@ -33,12 +34,12 @@ namespace CustomFilteringForRadGridView.GridViewFilter
                                                      Mode = BindingMode.OneWay
                                                  });
 
-	            DataContext = viewmodel;
-	        }
+                DataContext = viewmodel;
+            }
             else
-	        {
+            {
                 //((TreeBasedFilterViewModel)DataContext).Prepare(regionId:RegionId, divisionId:DivisionId);
-	        }
+            }
         }
 
         /// <summary>
@@ -52,6 +53,9 @@ namespace CustomFilteringForRadGridView.GridViewFilter
 
         #endregion
 
+        // TODO: Delegate the task of calling the method to the ViewModel
+        // TODO: eg. AddDistinctValue(item.Item as object)
+        // TODO: Asbtract hierarchies using IHierarchyLevel which contains current and collection properties
         private void RadTreeView_Checked(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
             // This event will be called when a RadTreeViewItem is checked
@@ -63,16 +67,34 @@ namespace CustomFilteringForRadGridView.GridViewFilter
             if (item.Item is RegionHierarchy)
             {
                 var region = (item.Item as RegionHierarchy).CurrentRegion;
-                
 
-                //vm.Prepare(region);
-                vm.AddRegionDistinctValue(region.RegionId);
+                // The region is to be removed if its state is indeterminate
+                // This is required because filtering between two different 
+                // hierarchy levels is done using OR operator.
+                // Also using the AND operator has the issue of invalid filtering
+                // eg. If Region 1, 2, 3, 4 are checked for filtering, the filtering will
+                // happen at region level properly. But when Region 2 is expanded Division 3, 4
+                // of Region 2 will be applied as well. So the expression will become:
+                // (Region 1 || Region 2|| Region 3 || Region 4) && (Division 3 || Division 4)
+                // Thus stores available only in Division 3 and Division 4 will be visible.
+                if (item.CheckState == ToggleState.Indeterminate)
+                {
+                    vm.RemoveRegionDistinctValue(region.RegionId);
+                }
+                else
+                {
+                    // Only add the region filter, if it is fully selected
+                    vm.AddRegionDistinctValue(region.RegionId);
+                }
             }
             else if (item.Item is DivisionHierarchy)
             {
                 var division = (item.Item as DivisionHierarchy).CurrentDivision;
 
-                vm.AddDivisionDistinctValue(division.DivisionId);
+                if (item.CheckState == ToggleState.Indeterminate)
+                    vm.RemoveDivisionDistinctValue(division.DivisionId);
+                else
+                    vm.AddDivisionDistinctValue(division.DivisionId);
             }
         }
 
@@ -95,6 +117,17 @@ namespace CustomFilteringForRadGridView.GridViewFilter
                 var division = (item.Item as DivisionHierarchy).CurrentDivision;
 
                 vm.RemoveDivisionDistinctValue(division.DivisionId);
+            }
+        }
+
+        private void _hierarchyTree_ItemPrepared(object sender, RadTreeViewItemPreparedEventArgs e)
+        {
+            var item = e.PreparedItem;
+
+            if (item.Item is NationalHierarchy)
+            {
+                item.CheckState = ToggleState.On;
+                item.IsExpanded = true;
             }
         }
     }

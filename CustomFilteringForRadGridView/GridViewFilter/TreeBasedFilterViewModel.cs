@@ -24,8 +24,8 @@ namespace CustomFilteringForRadGridView.GridViewFilter
         private DistinctHierarchyValuesFilterDescriptor _regionHierarchyFilter;
         private DistinctHierarchyValuesFilterDescriptor _divisionHierarchyFilter;
 
-        private List<RegionHierarchy> _sampleData;
-        public List<RegionHierarchy> SampleData
+        private List<NationalHierarchy> _sampleData;
+        public List<NationalHierarchy> SampleData
         {
             get { return _sampleData; }
             set
@@ -71,7 +71,7 @@ namespace CustomFilteringForRadGridView.GridViewFilter
             _regionHierarchyFilter = new DistinctHierarchyValuesFilterDescriptor("RegionId");
             _divisionHierarchyFilter = new DistinctHierarchyValuesFilterDescriptor("DivisionId");
 
-            _filters = new CompositeFilterDescriptor { LogicalOperator = FilterCompositionLogicalOperator.And };
+            _filters = new CompositeFilterDescriptor { LogicalOperator = FilterCompositionLogicalOperator.Or };
         }
 
         public void Prepare(Region region)

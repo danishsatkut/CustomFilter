@@ -45,4 +45,14 @@
 			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentRegion.RegionName}" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
 		</Grid>
 	</telerik:HierarchicalDataTemplate>
+    <telerik:HierarchicalDataTemplate x:Key="NationalTemplate" ItemsSource="{Binding Regions}" ItemTemplate="{StaticResource RegionTemplate}">
+        <Grid d:DesignWidth="149" d:DesignHeight="23">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.151*"/>
+                <ColumnDefinition Width="0.849*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextWrapping="Wrap" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="National" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
+        </Grid>
+    </telerik:HierarchicalDataTemplate>
 </ResourceDictionary>

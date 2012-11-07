@@ -9,7 +9,7 @@ namespace CustomFilteringForRadGridView.ViewModel
     public class MainPageViewModel : ViewModelBase
     {
         private int _selectedRegionId;
-        private List<RegionHierarchy> _nationalHierarchy;
+        private List<NationalHierarchy> _nationalHierarchy;
         private List<Store> _stores;
 
         public int SelectedRegionId
@@ -32,7 +32,7 @@ namespace CustomFilteringForRadGridView.ViewModel
             }
         }
 
-        public List<RegionHierarchy> NationalHierarchy
+        public List<NationalHierarchy> NationalHierarchy
         {
             get { return _nationalHierarchy; }
             set
