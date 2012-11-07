@@ -1,0 +1,48 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	mc:Ignorable="d">
+	<DataTemplate x:Key="StoreTemplate">
+		<Grid d:DesignWidth="149" d:DesignHeight="23">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.151*"/>
+				<ColumnDefinition Width="0.849*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock TextWrapping="Wrap" Text="{Binding StoreId}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" Text="{Binding StoreName}" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
+		</Grid>
+	</DataTemplate>
+	<telerik:HierarchicalDataTemplate x:Key="DistrictTemplate" ItemsSource="{Binding Stores}" ItemTemplate="{StaticResource StoreTemplate}">
+		<Grid d:DesignWidth="149" d:DesignHeight="23">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.151*"/>
+				<ColumnDefinition Width="0.849*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDistrict.DistrictId}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDistrict.DistrictName}" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
+		</Grid>
+	</telerik:HierarchicalDataTemplate>
+	<telerik:HierarchicalDataTemplate x:Key="DivisionTemplate" ItemsSource="{Binding Districts}" ItemTemplate="{StaticResource DistrictTemplate}">
+		<Grid d:DesignWidth="149" d:DesignHeight="23">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.151*"/>
+				<ColumnDefinition Width="0.849*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDivision.DivisionId}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentDivision.DivisionName}" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
+		</Grid>
+	</telerik:HierarchicalDataTemplate>
+	<telerik:HierarchicalDataTemplate x:Key="RegionTemplate" ItemsSource="{Binding Divisions}" ItemTemplate="{StaticResource DivisionTemplate}">
+		<Grid d:DesignWidth="149" d:DesignHeight="23">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.151*"/>
+				<ColumnDefinition Width="0.849*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentRegion.RegionId}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" Text="{Binding CurrentRegion.RegionName}" d:LayoutOverrides="Width, Height" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0"/>
+		</Grid>
+	</telerik:HierarchicalDataTemplate>
+</ResourceDictionary>

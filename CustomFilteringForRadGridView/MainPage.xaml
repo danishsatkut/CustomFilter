@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:CustomFilteringForRadGridView"
-	xmlns:filter="clr-namespace:CustomFilteringForRadGridView.CustomFilter"
+	xmlns:filter="clr-namespace:CustomFilteringForRadGridView.GridViewFilter"
 	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:ViewModel="clr-namespace:CustomFilteringForRadGridView.ViewModel"
     x:Class="CustomFilteringForRadGridView.MainPage"
@@ -25,6 +25,9 @@
         <telerik:RadGridView Margin="8,2,8,3" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding Stores}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False" Grid.Row="1" Grid.ColumnSpan="2">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding StoreName}" Header="Store Name">
+                	<telerik:GridViewDataColumn.FilteringControl>
+                		<filter:TreeBasedFilter />           	
+					</telerik:GridViewDataColumn.FilteringControl>
                 </telerik:GridViewDataColumn>
                 <telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
                 <telerik:GridViewDataColumn UniqueName="DistrictId" DataMemberBinding="{Binding DistrictId}" Header="District"/>

@@ -13,13 +13,17 @@ namespace HierarchyModel
         private static readonly List<District> Districts = new List<District>();
         public static readonly List<Store> Stores = new List<Store>();
 
-        private static readonly List<RegionHierarchy> CompleteHierarchy = new List<RegionHierarchy>();
+        private static List<RegionHierarchy> _completeHierarchy = null;
 
         public static List<RegionHierarchy> GenerateDataWithHierarchy()
         {
-            GenerateData();
-            CreateHierarchy();
-            return CompleteHierarchy;
+            if (_completeHierarchy == null)
+            {
+                _completeHierarchy = new List<RegionHierarchy>();
+                GenerateData();
+                CreateHierarchy();    
+            }
+            return _completeHierarchy;
         }
 
         private static void CreateHierarchy()
@@ -49,7 +53,7 @@ namespace HierarchyModel
                     regionHierarchy.Divisions.Add(divisionHierarchy);
                 }
 
-                CompleteHierarchy.Add(regionHierarchy);
+                _completeHierarchy.Add(regionHierarchy);
             }
         }
 

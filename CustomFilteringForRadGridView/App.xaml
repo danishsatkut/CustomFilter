@@ -1,9 +1,12 @@
 ﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              x:Class="CustomFilteringForRadGridView.App"
-             xmlns:local="clr-namespace:CustomFilteringForRadGridView.CustomFilter"
              >
     <Application.Resources>
-        <local:StringToIntConverter x:Key="StringToIntConverter" />
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="Assets/TreeViewTemplates.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    	</ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -81,6 +81,9 @@
     <Reference Include="Telerik.Windows.Controls.Input">
       <HintPath>Binaries\Telerik.Windows.Controls.Input.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>Binaries\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Data">
       <HintPath>Binaries\Telerik.Windows.Data.dll</HintPath>
     </Reference>
@@ -89,25 +92,29 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomFilter\HierarchyFilter.xaml.cs">
-      <DependentUpon>HierarchyFilter.xaml</DependentUpon>
+    <Compile Include="GridViewFilter\DistinctHierarchyValuesFilterDescriptor.cs" />
+    <Compile Include="GridViewFilter\TreeBasedFilter.xaml.cs">
+      <DependentUpon>TreeBasedFilter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomFilter\HierarchyFilterViewModel.cs" />
-    <Compile Include="CustomFilter\StringToIntConverter.cs" />
+    <Compile Include="GridViewFilter\TreeBasedFilterViewModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleData.cs" />
+    <Compile Include="ViewModel\ViewModelCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="CustomFilter\HierarchyFilter.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    <Page Include="Assets\TreeViewTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GridViewFilter\TreeBasedFilter.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
