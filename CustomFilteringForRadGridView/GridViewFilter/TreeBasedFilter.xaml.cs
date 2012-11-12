@@ -66,7 +66,7 @@ namespace CustomFilteringForRadGridView.GridViewFilter
 
             if (item.Item is RegionHierarchy)
             {
-                var region = (item.Item as RegionHierarchy).CurrentRegion;
+                var region = (item.Item as RegionHierarchy).CurrentModel;
 
                 // The region is to be removed if its state is indeterminate
                 // This is required because filtering between two different 
@@ -79,22 +79,22 @@ namespace CustomFilteringForRadGridView.GridViewFilter
                 // Thus stores available only in Division 3 and Division 4 will be visible.
                 if (item.CheckState == ToggleState.Indeterminate)
                 {
-                    vm.RemoveRegionDistinctValue(region.RegionId);
+                    vm.RemoveRegionDistinctValue(region.Id);
                 }
                 else
                 {
                     // Only add the region filter, if it is fully selected
-                    vm.AddRegionDistinctValue(region.RegionId);
+                    vm.AddRegionDistinctValue(region.Id);
                 }
             }
             else if (item.Item is DivisionHierarchy)
             {
-                var division = (item.Item as DivisionHierarchy).CurrentDivision;
+                var division = (item.Item as DivisionHierarchy).CurrentModel;
 
                 if (item.CheckState == ToggleState.Indeterminate)
-                    vm.RemoveDivisionDistinctValue(division.DivisionId);
+                    vm.RemoveDivisionDistinctValue(division.Id);
                 else
-                    vm.AddDivisionDistinctValue(division.DivisionId);
+                    vm.AddDivisionDistinctValue(division.Id);
             }
         }
 
@@ -106,17 +106,17 @@ namespace CustomFilteringForRadGridView.GridViewFilter
 
             if (item.Item is RegionHierarchy)
             {
-                var region = (item.Item as RegionHierarchy).CurrentRegion;
+                var region = (item.Item as RegionHierarchy).CurrentModel;
 
                 //vm.Prepare(null);
 
-                vm.RemoveRegionDistinctValue(region.RegionId);
+                vm.RemoveRegionDistinctValue(region.Id);
             }
             else if (item.Item is DivisionHierarchy)
             {
-                var division = (item.Item as DivisionHierarchy).CurrentDivision;
+                var division = (item.Item as DivisionHierarchy).CurrentModel;
 
-                vm.RemoveDivisionDistinctValue(division.DivisionId);
+                vm.RemoveDivisionDistinctValue(division.Id);
             }
         }
 

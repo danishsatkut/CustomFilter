@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <telerik:RadGridView Margin="8,2,8,3" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding Stores}" AutoGenerateColumns="False" DataLoadMode="Asynchronous" ScrollMode="Deferred" ShowGroupPanel="False" Grid.Row="1" Grid.ColumnSpan="2">
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding StoreName}" Header="Store Name">
+                <telerik:GridViewDataColumn UniqueName="StoreName" DataMemberBinding="{Binding Name}" Header="Store Name">
                 	<telerik:GridViewDataColumn.FilteringControl>
                 		<filter:TreeBasedFilter />           	
 					</telerik:GridViewDataColumn.FilteringControl>
@@ -32,6 +32,7 @@
                 <telerik:GridViewDataColumn UniqueName="Value" DataMemberBinding="{Binding Value}" Header="Value"/>
                 <telerik:GridViewDataColumn UniqueName="DistrictId" DataMemberBinding="{Binding DistrictId}" Header="District"/>
                 <telerik:GridViewDataColumn UniqueName="DivisionId" DataMemberBinding="{Binding DivisionId}" Header="Division"/>
+                <telerik:GridViewDataColumn UniqueName="BsomId" DataMemberBinding="{Binding BsomId}" Header="BSOM" />
                 <telerik:GridViewDataColumn UniqueName="RegionId" DataMemberBinding="{Binding RegionId}" Header="Region"/>
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>

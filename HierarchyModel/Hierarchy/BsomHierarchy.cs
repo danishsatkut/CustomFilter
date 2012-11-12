@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HierarchyModel.Model;
 
 namespace HierarchyModel.Hierarchy
 {
-    public class DistrictHierarchy : IHierarchyLevel
+    public class BsomHierarchy : IHierarchyLevel
     {
-        private readonly List<IHierarchyLevel> _stores = new List<IHierarchyLevel>();
+        private readonly List<IHierarchyLevel> _stores = new List<IHierarchyLevel>(); 
 
         #region Implementation of IHierarchyLevel
 

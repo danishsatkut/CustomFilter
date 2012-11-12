@@ -1,10 +1,13 @@
 ﻿namespace HierarchyModel.Model
 {
-    public class Store
+    public class Store : IModel
     {
-        public int StoreId { get; set; }
+        #region Implementation of IModel
 
-        public string StoreName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        #endregion
 
         public int Value { get; set; }
 
@@ -13,5 +16,7 @@
         public int DivisionId { get; set; }
 
         public int DistrictId { get; set; }
+
+        public int BsomId { get; set; }
     }
 }

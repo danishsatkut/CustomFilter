@@ -55,15 +55,20 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hierarchy\BsomHierarchy.cs" />
     <Compile Include="Hierarchy\DistrictHierarchy.cs" />
     <Compile Include="Hierarchy\DivisionHierarchy.cs" />
     <Compile Include="Hierarchy\IHierarchyLevel.cs" />
     <Compile Include="Hierarchy\NationalHierarchy.cs" />
+    <Compile Include="Hierarchy\RegionChildHierarchyLevel.cs" />
     <Compile Include="Hierarchy\RegionHierarchy.cs" />
+    <Compile Include="Hierarchy\StoreHierarchy.cs" />
+    <Compile Include="Model\Bsom.cs" />
     <Compile Include="Model\District.cs" />
     <Compile Include="Model\Division.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="Model\Region.cs" />
+    <Compile Include="Model\RegionChild.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleDataGenerator.cs" />

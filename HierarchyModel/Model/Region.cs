@@ -1,9 +1,12 @@
 ﻿namespace HierarchyModel.Model
 {
-    public class Region
+    public class Region : IModel
     {
-        public int RegionId { get; set; }
+        #region Implementation of IModel
 
-        public string RegionName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        #endregion
     }
 }

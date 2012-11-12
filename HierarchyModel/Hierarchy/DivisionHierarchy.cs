@@ -3,15 +3,15 @@ using HierarchyModel.Model;
 
 namespace HierarchyModel.Hierarchy
 {
-    public class DivisionHierarchy
+    public class DivisionHierarchy : IHierarchyLevel
     {
-        private List<DistrictHierarchy> _districts = new List<DistrictHierarchy>();
-        public Division CurrentDivision { get; set; }
+        private readonly List<IHierarchyLevel> _districts = new List<IHierarchyLevel>();
 
-        public List<DistrictHierarchy> Districts
-        {
-            get { return _districts; }
-            set { _districts = value; }
-        }
+        #region Implementation of IHierarchyLevel
+
+        public IModel CurrentModel { get; set; }
+        public List<IHierarchyLevel> ChildCollection { get { return _districts; } }
+
+        #endregion
     }
 }

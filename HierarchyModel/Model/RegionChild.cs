@@ -1,6 +1,6 @@
 ﻿namespace HierarchyModel.Model
 {
-    public class District : IModel
+    public class RegionChild : IModel
     {
         #region Implementation of IModel
 
@@ -8,9 +8,5 @@
         public string Name { get; set; }
 
         #endregion
-
-        public int RegionId { get; set; }
-
-        public int DivisionId { get; set; }
     }
 }

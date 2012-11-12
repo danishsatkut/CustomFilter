@@ -1,10 +1,13 @@
 ﻿namespace HierarchyModel.Model
 {
-    public class Division
+    public class Division : IModel
     {
-        public int DivisionId { get; set; }
+        #region Implementation of IModel
 
-        public string DivisionName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        #endregion
 
         public int RegionId { get; set; }
     }

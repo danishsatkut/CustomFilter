@@ -7,6 +7,6 @@ namespace HierarchyModel.Hierarchy
     {
         IModel CurrentModel { get; set; }
 
-        List<IModel> Collection { get; set; }
+        List<IHierarchyLevel> ChildCollection { get; }
     }
 }

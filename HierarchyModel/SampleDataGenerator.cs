@@ -11,6 +11,7 @@ namespace HierarchyModel
         private static readonly List<Region> Regions = new List<Region>();
         private static readonly List<Division> Divisions = new List<Division>();
         private static readonly List<District> Districts = new List<District>();
+        private static readonly List<Bsom> Bsoms = new List<Bsom>();
         public static readonly List<Store> Stores = new List<Store>();
 
         private static List<NationalHierarchy> _completeHierarchy = null;
@@ -32,28 +33,57 @@ namespace HierarchyModel
 
             foreach (var region in Regions)
             {
-                var regionHierarchy = new RegionHierarchy {CurrentRegion = region};
+                var regionHierarchy = new RegionHierarchy { CurrentModel =  region };
+                var divisionHierarchyLevel = new RegionChildHierarchyLevel { CurrentModel = new RegionChild { Id = 1, Name = "Divisions in Region"}};
+                var bsomHierarchyLevel = new RegionChildHierarchyLevel
+                                             {CurrentModel = new RegionChild {Id = 2, Name = "BSOMs in Region"}};
 
+                #region Division Hierarchy for this region
+                // For Division Hierarchy
                 foreach (var divisionHierarchy in from division in Divisions 
-                                                  where division.RegionId == region.RegionId
-                                                  select new DivisionHierarchy {CurrentDivision = division})
+                                                  where division.RegionId == region.Id
+                                                  select new DivisionHierarchy {CurrentModel = division})
                 {
                     foreach (var districtHiearchy in from district in Districts
-                                                         where district.DivisionId == divisionHierarchy.CurrentDivision.DivisionId
-                                                         select new DistrictHierarchy {CurrentDistrict = district})
+                                                         where district.DivisionId == divisionHierarchy.CurrentModel.Id
+                                                         select new DistrictHierarchy {CurrentModel = district})
                     {
                         foreach (var store in from store in Stores
-                                                  where store.DistrictId == districtHiearchy.CurrentDistrict.DistrictId
-                                                  select store)
+                                                  where store.DistrictId == districtHiearchy.CurrentModel.Id
+                                                  select new StoreHierarchy { CurrentModel = store})
                         {
-                            districtHiearchy.Stores.Add(store);
+                            districtHiearchy.ChildCollection.Add(store);
                         }
 
-                        divisionHierarchy.Districts.Add(districtHiearchy);
+                        divisionHierarchy.ChildCollection.Add(districtHiearchy);
                     }
 
-                    regionHierarchy.Divisions.Add(divisionHierarchy);
+                    // Change
+                    divisionHierarchyLevel.ChildCollection.Add(divisionHierarchy);
                 }
+
+                #endregion
+
+                #region BSOM Hierachy for this region
+                // For BSOM hierarchy
+                foreach (var bsomHierarchy in from bsom in Bsoms
+                                                  where bsom.RegionId == region.Id
+                                                  select new BsomHierarchy() { CurrentModel = bsom })
+                {
+                        foreach (var store in from store in Stores
+                                              where store.BsomId == bsomHierarchy.CurrentModel.Id
+                                              select new StoreHierarchy { CurrentModel = store })
+                        {
+                            bsomHierarchy.ChildCollection.Add(store);
+                        }
+
+                    bsomHierarchyLevel.ChildCollection.Add(bsomHierarchy);
+                }
+                #endregion
+
+                // Change
+                regionHierarchy.ChildCollection.Add(divisionHierarchyLevel);
+                regionHierarchy.ChildCollection.Add(bsomHierarchyLevel);
 
                 nationalHierarchy.Regions.Add(regionHierarchy);
             }
@@ -69,10 +99,11 @@ namespace HierarchyModel
             {
                 Stores.Add(new Store
                 {
-                    StoreName = "Store " + i,
-                    StoreId = i + 1,
+                    Name = "Store " + i,
+                    Id = i + 1,
                     DistrictId = (i / 5) + 1,
                     DivisionId = (i / 10) + 1,
+                    BsomId = 0,
                     RegionId = (i / 20) + 1,
                     Value = random.Next(0, 99999999)
                 });
@@ -81,8 +112,8 @@ namespace HierarchyModel
                 {
                     Districts.Add(new District
                                        {
-                                           DistrictName = string.Format("District {0}", ((i / 5) + 1)),
-                                           DistrictId = (i / 5) + 1,
+                                           Name = string.Format("District {0}", ((i / 5) + 1)),
+                                           Id = (i / 5) + 1,
                                            DivisionId = (i / 10) + 1,
                                            RegionId = (i / 20) + 1
                                        });
@@ -92,20 +123,41 @@ namespace HierarchyModel
                 {
                     Divisions.Add(new Division
                                        {
-                                           DivisionName = string.Format("Division {0}", ((i / 10) + 1)),
-                                           DivisionId = (i / 10) + 1,
+                                           Name = string.Format("Division {0}", ((i / 10) + 1)),
+                                           Id = (i / 10) + 1,
                                            RegionId = (i / 20) + 1
                                        });
+
+                    Bsoms.Add(new Bsom
+                                  {
+                                      Name = string.Format("BSOM {0}", ((i / 10) + 1)),
+                                      Id = (i / 10) + 1,
+                                      RegionId = (i / 20) + 1
+                                  });
                 }
 
                 if (i % 20 == 0)
                 {
                     Regions.Add(new Region
                                      {
-                                         RegionName = string.Format("Region {0}", ((i / 20) + 1)),
-                                         RegionId = (i / 20) + 1
+                                         Name = string.Format("Region {0}", ((i / 20) + 1)),
+                                         Id = (i / 20) + 1
                                      });
                 }
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                Stores.Add(new Store
+                {
+                    Name = "Store " + (i + 100),
+                    Id = i + 101,
+                    DistrictId = 0,
+                    DivisionId = 0,
+                    BsomId = (i / 10) + 1,
+                    RegionId = (i / 20) + 1,
+                    Value = random.Next(0, 99999999)
+                });
             }
         }
     }
